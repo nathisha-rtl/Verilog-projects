@@ -1,0 +1,26 @@
+module mux_2_to_1_tb;
+  reg I0,I1,S0 ;
+  wire Y;
+  mux_2_to_1 uut(
+    .I0(I0),
+    .I1(I1),
+    .S0(S0),
+    .Y(Y));
+  initial begin
+    $dumpfile("mux_2_to_1_tb.vcd");
+    $dumpvars(0,mux_2_to_1_tb);
+    $monitor("$time=%0t ; I0=%b ; I1=%b ; S0=%b ; Y= %b " , $time, I0 , I1 , S0 , Y);
+    I0=0 ; I1=0 ; S0=0 ; #10;
+    I0=0 ; I1=0 ; S0=1 ; #10;
+    
+    I0=0 ; I1=1 ; S0=0 ; #10 ;
+    I0=0 ; I1=1 ; S0=1 ; #10 ;
+    
+    I0=1 ; I1=0 ; S0=0 ; #10;
+    I0=1 ; I1=0 ; S0=1 ; #10 ;
+    
+    I0=1 ; I1=1 ; S0=0 ; #10;
+    I0=1 ; I1=1 ; S0=1 ; #10 ;
+    $finish;
+  end
+endmodule
