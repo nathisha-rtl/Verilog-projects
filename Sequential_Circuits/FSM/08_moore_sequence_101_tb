@@ -1,0 +1,36 @@
+module moore_fsm_sequence_101_tb;
+  reg clk;
+  reg reset;
+  reg input_signal;
+  wire Y;
+  
+  moore_fsm_sequence_101 uut(.clk(clk),
+                             .reset(reset),
+                             .input_signal(input_signal),
+                             .Y(Y));
+  always #5 clk=~clk;
+  
+  initial begin
+    $dumpfile("moore_fsm_sequence_101.vcd");
+    $dumpvars(0,moore_fsm_sequence_101_tb);
+    $monitor("$time=%0t | clk=%b | reset=%b | input_signal=%b | Y=%b | " , $time , clk , reset , input_signal , Y );
+    
+    //initial values 
+    clk=0;
+    reset=1;
+    input_signal=0;#10;
+    
+    
+    reset=0;#10;
+    
+    input_signal=1;#10;
+    input_signal=0;#10;
+    input_signal=1;#10;
+    input_signal=0;#10;
+    input_signal=1;#10;
+    $finish;
+  end
+endmodule
+
+    
+    
